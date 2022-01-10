@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tao.mapper.BookMapper">
+    <!--增删改不能设置返回值类型-->
+    <!--不需要添加id,设置自增,前端数据封装成对象后id应该是默认的0，但是这里又不用-->
+    <insert id="addBook" parameterType="book">
+        insert ssmbuild.books(bookName, bookCount, detail)
+        values (#{bookName}, #{bookCount}, #{detail})
+    </insert>
+    <delete id="delBookById" parameterType="int">
+        delete from ssmbuild.books where bookID=#{bookId}
+    </delete>
+    <update id="updateBookById" parameterType="book">
+        update ssmbuild.books set bookName=#{bookName},bookCount=#{bookCount},detail=#{detail}
+        where bookID=#{bookID}
+    </update>
+    <!--查询可以设置返回值类型-->
+    <select id="queryBookById" parameterType="int" resultType="book">
+        select * from ssmbuild.books where bookID=#{bookId}
+    </select>
+    <select id="queryAllBook" resultType="book">
+        select * from ssmbuild.books
+    </select>
+
+    <select id="queryBookByName" resultType="book">
+        select * from ssmbuild.books where bookName=#{bookName}
+    </select>
+    
+</mapper>
